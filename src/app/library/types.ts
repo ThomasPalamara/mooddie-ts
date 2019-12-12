@@ -13,3 +13,8 @@ export interface TextFieldProps {
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   children?: ReactNode;
 }
+
+export interface ToastProps {
+  message: string;
+  type: 'error' | 'success' | 'warning';
+}

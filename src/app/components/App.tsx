@@ -5,6 +5,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import '../styles/tailwind.css';
 import { withAuthentication } from '../contexts/Firebase/withAuthentication';
 import { firebase } from '../contexts/Firebase';
+import { ToasterProvider } from '../contexts/Toaster/Toaster';
 
 const App = () => {
   const [, setauthUser] = useState(null);
@@ -17,12 +18,14 @@ const App = () => {
 
   return (
     <div className="App">
-      <Router>
-        <Navigation />
-        <div className="pt-6">
-          <Routes />
-        </div>
-      </Router>
+      <ToasterProvider>
+        <Router>
+          <Navigation />
+          <div className="pt-6">
+            <Routes />
+          </div>
+        </Router>
+      </ToasterProvider>
     </div>
   );
 };
