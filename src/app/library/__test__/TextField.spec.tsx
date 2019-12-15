@@ -32,7 +32,6 @@ describe('Label', () => {
 describe('Wrapper', () => {
   it('should not render if noWrapper is true', () => {
     const { wrapper } = setup({ noWrapper: true });
-    console.log(wrapper.debug());
     expect(
       wrapper
         .find('Wrapper')

@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import classNames from 'classnames';
 import { TextFieldProps } from './types';
 
@@ -18,7 +18,7 @@ const TextField: React.FunctionComponent<TextFieldProps> = ({
   const labelClasses = classNames('block text-gray-700 text-sm font-bold mb-3', labelClassName);
 
   return (
-    <div className="wrapperClassName">
+    <div className={wrapperClasses}>
       {labelText && <label className={labelClasses}>{labelText}</label>}
       <input className={classes} {...other} />
     </div>

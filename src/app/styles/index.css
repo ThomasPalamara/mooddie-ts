@@ -1,5 +1,13 @@
-@tailwind base;
+/* purgecss start ignore */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
 
-@tailwind components;
+@import './components/alert.css';
+/* purgecss end ignore */
 
-@tailwind utilities;
+.abs-center {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0);
+}

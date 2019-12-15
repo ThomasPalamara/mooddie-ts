@@ -17,4 +17,6 @@ export interface TextFieldProps {
 export interface ToastProps {
   message: string;
   type: 'error' | 'success' | 'warning';
+  handleClose: (id: string | number) => void;
+  id: string | number;
 }

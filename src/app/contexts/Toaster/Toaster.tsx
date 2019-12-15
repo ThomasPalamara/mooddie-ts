@@ -32,12 +32,17 @@ export const ToasterProvider: React.FC = ({ children }) => {
     toastCount++;
     setToaster([...toaster, { id: toastCount, message, type }]);
   };
+  const removeToast = (id: string | number) => {
+    setToaster(prev => prev.filter(e => e.id !== id));
+  };
   return (
     <ToasterContext.Provider value={{ addToast }}>
       {children}
-      {toaster.map(({ id, message, type }) => (
-        <Toast key={id} message={message} type={type} />
-      ))}
+      <div className="w-1/2 abs-center top-0">
+        {toaster.map(({ id, message, type }) => (
+          <Toast key={id} id={id} handleClose={removeToast} message={message} type={type} />
+        ))}
+      </div>
     </ToasterContext.Provider>
   );
 };
