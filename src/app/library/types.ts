@@ -1,5 +1,7 @@
 import { ReactNode } from 'react';
 
+export type ThemeTypes = 'primary' | 'error' | 'success';
+
 export interface TextFieldProps {
   name: string;
   type: string;
@@ -12,11 +14,18 @@ export interface TextFieldProps {
   onBlur?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   children?: ReactNode;
+  error?: string | null;
 }
 
 export interface ToastProps {
   message: string;
-  type: 'error' | 'success' | 'warning';
+  type: ThemeTypes;
   handleClose: (id: string | number) => void;
   id: string | number;
+}
+
+export interface ButtonProps {
+  type: 'button' | 'submit' | 'reset' | undefined;
+  className?: string;
+  theme?: ThemeTypes;
 }

@@ -4,7 +4,7 @@ import { Toast } from '../../library';
 interface Toast {
   id: number;
   message: string;
-  type: 'error' | 'success' | 'warning';
+  type: 'error' | 'success';
 }
 
 type ContextProps = {

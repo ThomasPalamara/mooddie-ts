@@ -21,7 +21,6 @@ const Toast: React.FunctionComponent<ToastProps> = ({
   return (
     <div className={classes} {...others}>
       {message}
-      {id}
       <X className="cursor-pointer" onClick={() => handleClose(id)} />
     </div>
   );

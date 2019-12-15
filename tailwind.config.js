@@ -23,6 +23,10 @@ module.exports = {
         default: '#2f855a',
         lighter: '#f0fff4',
       },
+      primary: {
+        default: '#4299e1',
+        darker: '#2b6cb0',
+      },
     },
   },
   variants: {},

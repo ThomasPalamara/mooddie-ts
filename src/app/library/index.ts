@@ -3,4 +3,5 @@ import Card from './Card';
 import Container from './Container';
 import AuthWrapper from './AuthWrapper';
 import Toast from './Toast';
-export { TextField, Card, Container, AuthWrapper, Toast };
+import Button from './Button';
+export { TextField, Button, Card, Container, AuthWrapper, Toast };

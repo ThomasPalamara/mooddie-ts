@@ -3,7 +3,6 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
-@import './components/alert.css';
 /* purgecss end ignore */
 
 .abs-center {
