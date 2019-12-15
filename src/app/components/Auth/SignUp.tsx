@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
-import { TextField, AuthWrapper } from '../../library';
+import { TextField, AuthWrapper, Button } from '../../library';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
 import { auth, db } from '../../contexts/Firebase';
 import _ from 'lodash';
 import ROUTES from '../../constants/routes';
-import { Formik, Form, Field, useField, FormikHelpers } from 'formik';
+import { Formik, Form, useField, FormikHelpers } from 'formik';
 import { TextFieldProps } from '../../library/types';
 import { withAuthentication } from '../../contexts/Firebase/withAuthentication';
 import { ToasterContext, useToaster } from '../../contexts/Toaster/Toaster';
@@ -24,8 +24,8 @@ const SignUp: React.FC = props => {
 
   const initialFormValues = { email: '', password: '', username: '' } as FormValues;
   const SignupSchema = Yup.object().shape({
-    userName: Yup.string()
-      .min(2, t('error.username.long'))
+    username: Yup.string()
+      .min(2, t('error.username.short'))
       .max(50, t('error.username.long'))
       .required(t('error.required')),
     email: Yup.string()
@@ -56,6 +56,23 @@ const SignUp: React.FC = props => {
       });
   };
 
+  const Field = ({ ...props }) => {
+    const [field, meta] = useField(props.name);
+
+    console.log('meta :', meta);
+    // return <div></div>;
+    return (
+      <>
+        <TextField
+          {...field}
+          {...props}
+          error={meta.touched && meta.error ? meta.error : null}
+          type={props.type}
+        />
+      </>
+    );
+  };
+
   return (
     <AuthWrapper>
       <h1 className="text-center">{t('signUp')}</h1>
@@ -66,10 +83,10 @@ const SignUp: React.FC = props => {
       >
         {({ handleChange, handleBlur, values }) => (
           <Form>
-            <Field type="text" name="username" label={t('username')} as={TextField} />
-            <Field type="text" name="email" label={t('email')} as={TextField} />
-            <Field type="password" name="password" label={t('password')} as={TextField} />
-            <button type="submit">{t('submit')}</button>
+            <Field type="text" name="username" label={t('username')} />
+            <Field type="text" name="email" label={t('email')} />
+            <Field type="password" name="password" label={t('password')} />
+            <Button type="submit">{t('submit')}</Button>
             <button onClick={() => addToast('success', 'This is an error')}>Add a toaster</button>
           </Form>
         )}
