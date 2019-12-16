@@ -25,7 +25,8 @@ export interface ToastProps {
 }
 
 export interface ButtonProps {
-  type: 'button' | 'submit' | 'reset' | undefined;
+  type?: 'button' | 'submit' | 'reset' | undefined;
   className?: string;
   theme?: ThemeTypes;
+  onClick?: (e: React.MouseEvent) => void;
 }

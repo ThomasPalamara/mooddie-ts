@@ -1,12 +1,13 @@
+import _ from 'lodash';
 interface NavigationOption {
   value: string;
   title: string;
 }
 
-const NavigationOptions = (): Array<NavigationOption> => [
+export const NavigationOptions = (): Array<NavigationOption> => [
   {
     value: 'landing',
-    title: 'Home',
+    title: 'Landing',
   },
   {
     value: 'signUp',
@@ -17,5 +18,9 @@ const NavigationOptions = (): Array<NavigationOption> => [
     title: 'Sign in',
   },
 ];
-
-export default NavigationOptions;
+export const AuthNavigationOptions = (): Array<NavigationOption> => [
+  {
+    value: 'home',
+    title: 'Home',
+  },
+];

@@ -6,6 +6,7 @@ import '../styles/tailwind.css';
 import { withAuthentication } from '../contexts/Firebase/withAuthentication';
 import { firebase } from '../contexts/Firebase';
 import { ToasterProvider } from '../contexts/Toaster/Toaster';
+import { Container } from '../library';
 
 const App = () => {
   const [, setauthUser] = useState(null);
@@ -21,9 +22,9 @@ const App = () => {
       <ToasterProvider>
         <Router>
           <Navigation />
-          <div className="pt-6">
+          <Container className="pt-6">
             <Routes />
-          </div>
+          </Container>
         </Router>
       </ToasterProvider>
     </div>

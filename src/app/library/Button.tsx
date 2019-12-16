@@ -6,7 +6,8 @@ const Button: React.FunctionComponent<ButtonProps> = ({
   className,
   theme = 'primary',
   children,
-  type,
+  type = 'button',
+  onClick = () => {},
   ...others
 }) => {
   const classes = classNames(
@@ -15,7 +16,7 @@ const Button: React.FunctionComponent<ButtonProps> = ({
   );
 
   return (
-    <button type={type} className={classes} {...others}>
+    <button type={type} className={classes} onClick={onClick} {...others}>
       {children}
     </button>
   );
