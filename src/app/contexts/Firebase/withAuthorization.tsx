@@ -11,9 +11,10 @@ interface InterfaceProps {
 export const withAuthorization = (Component: React.FC) => {
   class WithAuthorization extends React.Component<InterfaceProps, {}> {
     public componentDidMount() {
+      const { history } = this.props;
       firebase.auth.onAuthStateChanged(authUser => {
         if (!authUser) {
-          this.props.history.push(ROUTES.SIGN_IN);
+          history.push(ROUTES.SIGN_IN);
         }
       });
     }
@@ -24,6 +25,7 @@ export const withAuthorization = (Component: React.FC) => {
           {authUser => {
             console.log('authUser :', authUser);
             if (authUser) return <Component />;
+            return <div />;
           }}
         </AuthUserContext.Consumer>
       );
@@ -32,3 +34,5 @@ export const withAuthorization = (Component: React.FC) => {
 
   return withRouter(WithAuthorization as any);
 };
+
+export default withAuthorization;

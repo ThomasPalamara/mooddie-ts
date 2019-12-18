@@ -1,4 +1,3 @@
-import _ from 'lodash';
 interface NavigationOption {
   value: string;
   title: string;
@@ -10,7 +9,7 @@ export const NavigationOptions = (): Array<NavigationOption> => [
     title: 'Landing',
   },
   {
-    value: 'signUp',
+    value: 'signup',
     title: 'Sign up',
   },
   {

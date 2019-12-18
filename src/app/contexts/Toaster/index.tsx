@@ -13,7 +13,7 @@ type ContextProps = {
 
 const initialValue = {
   addToast: (): void => {
-    //Initial function
+    // Initial function
   },
 };
 
@@ -29,7 +29,7 @@ export const ToasterProvider: React.FC = ({ children }) => {
   const [toaster, setToaster] = useState<Array<Toast>>([]);
 
   const addToast = (type: Toast['type'], message: Toast['message']) => {
-    toastCount++;
+    toastCount += 1;
     setToaster([...toaster, { id: toastCount, message, type }]);
   };
   const removeToast = (id: string | number) => {

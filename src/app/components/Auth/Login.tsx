@@ -1,13 +1,15 @@
 import React from 'react';
-import { TextField, AuthWrapper, Button } from '../../library';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
-import { auth } from '../../contexts/Firebase';
-import ROUTES from '../../constants/routes';
 import { Formik, Form, useField, FormikHelpers } from 'formik';
-import { withAuthentication } from '../../contexts/Firebase/withAuthentication';
-import { useToaster } from '../../contexts/Toaster/Toaster';
 import * as Yup from 'yup';
+
+import { auth } from '../../contexts/Firebase';
+import { withAuthentication } from '../../contexts/Firebase/withAuthentication';
+import { useToaster } from '../../contexts/Toaster';
+
+import { TextField, AuthWrapper, Button } from '../../library';
+import ROUTES from '../../constants/routes';
 
 interface FormValues {
   email: string;
@@ -15,13 +17,13 @@ interface FormValues {
   username: string;
 }
 
-const SignUp: React.FC = props => {
+const Signup: React.FC = () => {
   const { t } = useTranslation('auth');
   const history = useHistory();
   const { addToast } = useToaster();
 
   const initialFormValues = { email: '', password: '' } as FormValues;
-  const SignInSchema = Yup.object().shape({
+  const LoginSchema = Yup.object().shape({
     email: Yup.string().required(t('error.required')),
     password: Yup.string().required(t('error.required')),
   });
@@ -29,7 +31,7 @@ const SignUp: React.FC = props => {
   const handleOnSubmit = (values: FormValues, { setSubmitting }: FormikHelpers<FormValues>) => {
     const { email, password } = values;
     auth
-      .doSignInWithEmailAndPassword(email, password)
+      .doLoginWithEmailAndPassword(email, password)
       .then(() => {
         history.push(ROUTES.HOME);
       })
@@ -40,13 +42,14 @@ const SignUp: React.FC = props => {
   };
 
   const Field = ({ ...props }) => {
-    const [field, meta] = useField(props.name);
+    const { name, type } = props;
+    const [field, meta] = useField(name);
     return (
       <TextField
         {...field}
         {...props}
         error={meta.touched && meta.error ? meta.error : null}
-        type={props.type}
+        type={type}
       />
     );
   };
@@ -56,7 +59,7 @@ const SignUp: React.FC = props => {
       <h1 className="text-center">{t('signIn.title')}</h1>
       <Formik
         initialValues={initialFormValues}
-        validationSchema={SignInSchema}
+        validationSchema={LoginSchema}
         onSubmit={handleOnSubmit}
       >
         <Form>
@@ -68,4 +71,4 @@ const SignUp: React.FC = props => {
     </AuthWrapper>
   );
 };
-export default withAuthentication(SignUp);
+export default withAuthentication(Signup);

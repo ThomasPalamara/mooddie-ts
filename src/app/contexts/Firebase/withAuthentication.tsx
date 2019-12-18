@@ -22,7 +22,8 @@ export const withAuthentication = (Component: any) => {
 
     public componentDidMount() {
       firebase.auth.onAuthStateChanged(authUser => {
-        authUser ? this.setState(() => ({ authUser })) : this.setState(() => ({ authUser: null }));
+        if (authUser) this.setState(() => ({ authUser }));
+        else this.setState(() => ({ authUser: null }));
       });
     }
 
@@ -38,3 +39,5 @@ export const withAuthentication = (Component: any) => {
   }
   return WithAuthentication;
 };
+
+export default withAuthentication;

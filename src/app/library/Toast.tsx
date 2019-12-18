@@ -1,10 +1,9 @@
 import React from 'react';
 import classNames from 'classnames';
-import { ToastProps } from './types';
 import { X } from 'react-feather';
+import { ToastProps } from './types';
 
 const Toast: React.FunctionComponent<ToastProps> = ({
-  children,
   message,
   type,
   id,

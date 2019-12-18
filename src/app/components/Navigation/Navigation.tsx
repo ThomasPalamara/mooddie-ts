@@ -14,9 +14,9 @@ const Navigation: React.FunctionComponent = () => {
 
   return (
     <Container>
-      <ul className="flex justify-between py-3">
+      <ul className="flex justify-start py-3">
         {options.map(({ value, title }) => (
-          <Link key={value} className="" to={ROUTES[toConstCase(value)]}>
+          <Link key={value} className="p-3" to={ROUTES[toConstCase(value)]}>
             {title}
           </Link>
         ))}

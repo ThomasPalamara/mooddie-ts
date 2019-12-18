@@ -9,9 +9,9 @@ const TextField: React.FunctionComponent<TextFieldProps> = ({
   wrapperClassName,
   noWrapper,
   error,
+  name,
   ...other
 }) => {
-  console.log('error :', error);
   const classes = classNames(
     'appearance-none',
     'block w-full',
@@ -32,8 +32,12 @@ const TextField: React.FunctionComponent<TextFieldProps> = ({
 
   return (
     <div className={wrapperClasses}>
-      {labelText && <label className={labelClasses}>{labelText}</label>}
-      <input className={classes} {...other} />
+      {labelText && (
+        <label htmlFor={name} className={labelClasses}>
+          {labelText}
+        </label>
+      )}
+      <input id={name} className={classes} {...other} />
       {error && <div className={errorClasses}>{error}</div>}
     </div>
   );

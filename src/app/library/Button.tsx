@@ -7,7 +7,9 @@ const Button: React.FunctionComponent<ButtonProps> = ({
   theme = 'primary',
   children,
   type = 'button',
-  onClick = () => {},
+  onClick = () => {
+    // Empty
+  },
   ...others
 }) => {
   const classes = classNames(
@@ -16,6 +18,7 @@ const Button: React.FunctionComponent<ButtonProps> = ({
   );
 
   return (
+    // eslint-disable-next-line react/button-has-type
     <button type={type} className={classes} onClick={onClick} {...others}>
       {children}
     </button>

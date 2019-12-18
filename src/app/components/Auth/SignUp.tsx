@@ -1,13 +1,13 @@
 import React from 'react';
-import { TextField, AuthWrapper, Button } from '../../library';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
+import { Formik, Form, useField, FormikHelpers } from 'formik';
+import * as Yup from 'yup';
+import { TextField, AuthWrapper, Button } from '../../library';
 import { auth, db } from '../../contexts/Firebase';
 import ROUTES from '../../constants/routes';
-import { Formik, Form, useField, FormikHelpers } from 'formik';
 import { withAuthentication } from '../../contexts/Firebase/withAuthentication';
 import { useToaster } from '../../contexts/Toaster/Toaster';
-import * as Yup from 'yup';
 
 interface FormValues {
   email: string;
@@ -15,7 +15,7 @@ interface FormValues {
   username: string;
 }
 
-const SignUp: React.FC = props => {
+const Signup: React.FC = () => {
   const { t } = useTranslation('auth');
   const history = useHistory();
   const { addToast } = useToaster();
@@ -41,7 +41,7 @@ const SignUp: React.FC = props => {
       .then((authUser: any) => {
         db.doCreateUser(authUser.user.uid, username, email)
           .then(() => {
-            addToast('success', t('signUp.completed'));
+            addToast('success', t('signup.completed'));
             history.push(ROUTES.HOME);
           })
           .catch((error: any) => {
@@ -55,20 +55,21 @@ const SignUp: React.FC = props => {
   };
 
   const Field = ({ ...props }) => {
-    const [field, meta] = useField(props.name);
+    const { name, type } = props;
+    const [field, meta] = useField(name);
     return (
       <TextField
         {...field}
         {...props}
         error={meta.touched && meta.error ? meta.error : null}
-        type={props.type}
+        type={type}
       />
     );
   };
 
   return (
     <AuthWrapper>
-      <h1 className="auth-title">{t('signUp.title')}</h1>
+      <h1 className="auth-title">{t('signup.title')}</h1>
       <Formik
         initialValues={initialFormValues}
         validationSchema={SignupSchema}
@@ -84,4 +85,4 @@ const SignUp: React.FC = props => {
     </AuthWrapper>
   );
 };
-export default withAuthentication(SignUp);
+export default withAuthentication(Signup);

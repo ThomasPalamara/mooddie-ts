@@ -4,7 +4,6 @@ module.exports = {
     'plugin:react/recommended', // Uses the recommended rules from @eslint-plugin-react
     'plugin:@typescript-eslint/recommended', // Uses the recommended rules from @typescript-eslint/eslint-plugin
     'airbnb',
-    'plugin:jest/recommended',
     'plugin:prettier/recommended',
   ],
   parserOptions: {
@@ -23,7 +22,9 @@ module.exports = {
       },
     ],
     'prefer-template': 2,
+    'react/jsx-filename-extension': [2, { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
     'react/jsx-curly-brace-presence': 2,
+    'react/jsx-props-no-spreading': 0,
     '@typescript-eslint/explicit-function-return-type': 0,
   },
   overrides: [
@@ -37,6 +38,12 @@ module.exports = {
   settings: {
     react: {
       version: 'detect', // Tells eslint-plugin-react to automatically detect the version of React to use
+    },
+    'import/resolver': {
+      node: {
+        failOnError: false,
+        extensions: ['.js', '.jsx', '.ts', '.tsx'],
+      },
     },
   },
 };
