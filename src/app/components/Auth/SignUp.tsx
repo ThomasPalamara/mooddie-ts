@@ -7,7 +7,7 @@ import { TextField, AuthWrapper, Button } from '../../library';
 import { auth, db } from '../../contexts/Firebase';
 import ROUTES from '../../constants/routes';
 import { withAuthentication } from '../../contexts/Firebase/withAuthentication';
-import { useToaster } from '../../contexts/Toaster/Toaster';
+import { useToaster } from '../../contexts/Toaster';
 
 interface FormValues {
   email: string;

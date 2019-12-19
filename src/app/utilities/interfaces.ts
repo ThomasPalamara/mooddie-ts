@@ -1,9 +1,6 @@
-export interface Date {
-  day: number;
-  month: number;
-  year: number;
-}
+export type Date = number[];
 
-export interface Day extends Date {
+export interface Day {
+  date: Date;
   dayState?: string;
 }

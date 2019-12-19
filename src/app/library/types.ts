@@ -30,3 +30,8 @@ export interface ButtonProps {
   theme?: ThemeTypes;
   onClick?: (e: React.MouseEvent) => void;
 }
+
+export interface ModalProps {
+  show?: boolean;
+  onClose?: (e: React.MouseEvent) => void;
+}

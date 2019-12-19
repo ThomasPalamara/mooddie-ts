@@ -23,7 +23,6 @@ export const withAuthorization = (Component: React.FC) => {
       return (
         <AuthUserContext.Consumer>
           {authUser => {
-            console.log('authUser :', authUser);
             if (authUser) return <Component />;
             return <div />;
           }}

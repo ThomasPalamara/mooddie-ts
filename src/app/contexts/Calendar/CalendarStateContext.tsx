@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import _ from 'lodash';
 import { db } from '../Firebase';
 import { useAuthContext } from '../Firebase/AuthUserContext';
+import { Date } from '../../utilities/interfaces';
 
 interface Calendar {
   [key: number]: {
@@ -13,15 +14,16 @@ interface Calendar {
 
 interface ContextProps {
   state: Calendar;
-  setMood: (mood: string, year: number, month: number, day: number) => void;
+  setMood: (mood: string, date: Date) => void;
 }
 
 const initialState = {} as Calendar;
 
 const CalendarStateContext = React.createContext<ContextProps>({
   state: initialState,
-  setMood: (mood, year, month, day) => {
-    return { mood, year, month, day };
+  setMood: (mood, date) => {
+    console.log('here');
+    return { mood, date };
   },
 });
 
@@ -42,7 +44,9 @@ const CalendarStateProvider: React.FunctionComponent = ({ children }) => {
     }
   }, [authUser]);
 
-  const setMood: ContextProps['setMood'] = (mood, year, month, day) => {
+  const setMood: ContextProps['setMood'] = (mood, date) => {
+    console.log('mood :', mood);
+    const [year, month, day] = date;
     const data = _.setWith(state, `${year}.${month}.${day}`, mood, Object);
     if (authUser) db.setMood(authUser?.uid, data);
   };

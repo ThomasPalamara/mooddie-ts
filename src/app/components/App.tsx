@@ -6,6 +6,8 @@ import '../styles/tailwind.css';
 import { withAuthentication } from '../contexts/Firebase/withAuthentication';
 import { firebase } from '../contexts/Firebase';
 import { ToasterProvider } from '../contexts/Toaster';
+import { CalendarStateProvider } from '../contexts/Calendar/CalendarStateContext';
+import { ModalProvider } from '../contexts/Modal';
 import { Container } from '../library';
 
 const App = () => {
@@ -20,14 +22,18 @@ const App = () => {
 
   return (
     <div className="App">
-      <ToasterProvider>
-        <Router>
-          <Navigation />
-          <Container className="pt-6">
-            <Routes />
-          </Container>
-        </Router>
-      </ToasterProvider>
+      <CalendarStateProvider>
+        <ToasterProvider>
+          <ModalProvider>
+            <Router>
+              <Navigation />
+              <Container className="pt-6">
+                <Routes />
+              </Container>
+            </Router>
+          </ModalProvider>
+        </ToasterProvider>
+      </CalendarStateProvider>
     </div>
   );
 };

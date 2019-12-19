@@ -11,16 +11,14 @@ type ContextProps = {
   addToast: (type: Toast['type'], message: Toast['message']) => void;
 };
 
-const initialValue = {
-  addToast: (): void => {
-    // Initial function
-  },
-};
+export const ToasterContext = React.createContext<ContextProps | null>(null);
 
-export const ToasterContext = React.createContext<ContextProps>(initialValue);
-
-export const useToaster = (): ContextProps => {
-  return useContext(ToasterContext);
+export const useToaster = () => {
+  const context = useContext(ToasterContext);
+  if (context === null) {
+    throw new Error('useToaster must be used within a ToasterProvider');
+  }
+  return context;
 };
 
 let toastCount = 0;

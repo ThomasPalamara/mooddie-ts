@@ -1,22 +1,16 @@
 import React from 'react';
 // TODO: Try to finish popover component
-import Popover from '../../library/Popover';
 // import MoodPicker from 'components/Mood/MoodPicker';
 import { Day as DayProps } from '../../utilities/interfaces';
+import { useModal } from '../../contexts/Modal';
 
-const Day: React.FC<DayProps> = ({ day, month, year, dayState }) => {
+const Day: React.FC<DayProps> = ({ date, dayState }) => {
+  const { showMoodModal } = useModal();
   const btnClass = 'h-full w-full cursor-pointer';
   return (
-    <Popover
-      placement="topRight"
-      trigger="click"
-      // content={<MoodPicker day={day} month={month} year={year} />}
-      content={<p>dsfsdfsd</p>}
-    >
-      <button type="button" className={btnClass}>
-        {dayState}
-      </button>
-    </Popover>
+    <button type="button" onClick={() => showMoodModal(true, date)} className={btnClass}>
+      {dayState}
+    </button>
   );
 };
 

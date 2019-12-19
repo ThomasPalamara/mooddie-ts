@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Calendar from './Calendar';
 import YearSelector from './YearSelector';
-import { CalendarStateProvider } from '../../contexts/Calendar/CalendarStateContext';
 
 const Index: React.FunctionComponent = () => {
   const [year, setYear] = useState(new Date().getFullYear());
@@ -11,11 +10,11 @@ const Index: React.FunctionComponent = () => {
     setYear(Number(e.target.value));
   };
   return (
-    <CalendarStateProvider>
+    <>
       <YearSelector handleYearChange={handleYearChange} />
       {year}
       <Calendar year={year} />
-    </CalendarStateProvider>
+    </>
   );
 };
 
