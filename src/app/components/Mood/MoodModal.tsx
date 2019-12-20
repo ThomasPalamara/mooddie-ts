@@ -1,24 +1,18 @@
 import React from 'react';
-import { Modal, Button } from '../../library';
+import { Modal } from '../../library';
 import { ModalProps } from '../../library/types';
-import { Date } from '../../utilities/interfaces';
-import { useCalendar } from '../../contexts/Calendar/CalendarStateContext';
+import { Date } from '../../utilities/types';
+import MoodPicker from './MoodPicker';
 
 interface MoodModalProps extends ModalProps {
   date: Date;
 }
 
 const MoodModal: React.FC<MoodModalProps> = ({ show, onClose, date }) => {
-  const { setMood } = useCalendar();
-  const updateMood = (mood: string) => {
-    setMood(mood, date);
-  };
-
-  console.log('date :', date);
   return (
     <Modal show={show} onClose={onClose}>
       <div>
-        <Button onClick={() => updateMood('happy')}>Happy</Button>
+        <MoodPicker date={date} />
       </div>
     </Modal>
   );

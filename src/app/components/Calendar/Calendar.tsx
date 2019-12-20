@@ -1,4 +1,4 @@
-import React, { useContext, useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 import classNames from 'classnames';
 
 import _ from 'lodash';
@@ -6,7 +6,7 @@ import Day from './Day';
 import { useCalendar } from '../../contexts/Calendar/CalendarStateContext';
 import getMonthFromNum from '../../utilities/getMonthFromNum';
 import getDaysInMonth from '../../utilities/getDaysInMonth';
-import { Date } from '../../utilities/interfaces';
+import { Date } from '../../utilities/types';
 
 const months = _.range(1, 13);
 // const months = _.range(1, 3); // ! for tests
@@ -15,7 +15,7 @@ interface Props {
   year: number;
 }
 
-const DayWithContext: React.FunctionComponent<{ date: Date }> = ({ date }) => {
+const DayWithContext: React.FC<{ date: Date }> = ({ date }) => {
   const { state: calendarState } = useCalendar();
   const dayState = _.get(calendarState, date, undefined);
   return useMemo(() => {

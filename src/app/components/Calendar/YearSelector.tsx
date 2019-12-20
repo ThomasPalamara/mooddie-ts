@@ -10,11 +10,9 @@ const YearSelector: React.FC<Props> = ({ handleYearChange }) => {
   const actualYear = new Date().getFullYear();
   const years = _.range(startYear, actualYear + 2);
   return (
-    <select onChange={handleYearChange}>
+    <select defaultValue={actualYear} onChange={handleYearChange}>
       {years.map((year: number) => (
-        <option key={year} value={year} selected={year === actualYear}>
-          {year}
-        </option>
+        <option key={year}>{year}</option>
       ))}
     </select>
   );

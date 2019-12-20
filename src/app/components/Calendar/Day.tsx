@@ -1,7 +1,7 @@
 import React from 'react';
 // TODO: Try to finish popover component
 // import MoodPicker from 'components/Mood/MoodPicker';
-import { Day as DayProps } from '../../utilities/interfaces';
+import { Day as DayProps } from '../../utilities/types';
 import { useModal } from '../../contexts/Modal';
 
 const Day: React.FC<DayProps> = ({ date, dayState }) => {

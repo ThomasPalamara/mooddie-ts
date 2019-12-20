@@ -17,6 +17,8 @@ const Navigation: React.FunctionComponent = () => {
       <ul className="flex justify-start py-3">
         {options.map(({ value, title }) => (
           <Link key={value} className="p-3" to={ROUTES[toConstCase(value)]}>
+            {console.log('value ', toConstCase(value))}
+            {console.log('ROUTES[toConstCase(value)] :', ROUTES[toConstCase(value)])}
             {title}
           </Link>
         ))}

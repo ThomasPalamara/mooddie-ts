@@ -9,11 +9,11 @@ export const NavigationOptions = (): Array<NavigationOption> => [
     title: 'Landing',
   },
   {
-    value: 'signup',
+    value: 'sign_up',
     title: 'Sign up',
   },
   {
-    value: 'signIn',
+    value: 'sign_in',
     title: 'Sign in',
   },
 ];
