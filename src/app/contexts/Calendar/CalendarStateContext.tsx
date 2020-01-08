@@ -2,39 +2,36 @@ import React, { useState, useEffect, useContext } from 'react';
 import _ from 'lodash';
 import { db } from '../Firebase';
 import { useAuthContext } from '../Firebase/AuthUserContext';
-import { Date } from '../../utilities/types';
+import { Date, Mood } from '../../utilities/types';
 
 interface Calendar {
   [key: number]: {
     [key: number]: {
-      [key: number]: string;
+      [key: number]: Mood;
     };
   };
 }
 
 interface ContextProps {
   state: Calendar;
-  setMood: (mood: string, date: Date) => void;
+  setMood: (mood: string, date: Date) => Promise<boolean>;
+  setYearData: (data: Calendar) => void;
 }
 
-const initialState = {} as Calendar;
-
-const CalendarStateContext = React.createContext<ContextProps>({
-  state: initialState,
-  setMood: (mood, date) => {
-    console.log('here');
-    return { mood, date };
-  },
-});
+const CalendarStateContext = React.createContext<ContextProps | null>(null);
 
 export const useCalendar = () => {
-  return useContext(CalendarStateContext);
+  const context = useContext(CalendarStateContext);
+  if (context === null) {
+    throw new Error('useCalendar must be used within a CalendarStateProvider');
+  }
+  return context;
 };
 
 const CalendarStateProvider: React.FunctionComponent = ({ children }) => {
   const authUser = useAuthContext();
 
-  const [state, setState] = useState(initialState);
+  const [state, setState] = useState({});
 
   useEffect(() => {
     if (authUser !== null) {
@@ -45,14 +42,22 @@ const CalendarStateProvider: React.FunctionComponent = ({ children }) => {
   }, [authUser]);
 
   const setMood: ContextProps['setMood'] = (mood, date) => {
-    console.log('mood :', mood);
-    const [year, month, day] = date;
-    const data = _.setWith(state, `${year}.${month}.${day}`, mood, Object);
+    return new Promise((resolve, reject) => {
+      const [year, month, day] = date;
+      const data = _.setWith(state, `${year}.${month}.${day}`, mood, Object);
+      if (authUser)
+        db.setMood(`${authUser?.uid}`, data)
+          .then(() => resolve(true))
+          .catch(err => reject(err));
+    });
+  };
+
+  const setYearData = (data: Calendar) => {
     if (authUser) db.setMood(authUser?.uid, data);
   };
 
   return (
-    <CalendarStateContext.Provider value={{ state, setMood }}>
+    <CalendarStateContext.Provider value={{ state, setMood, setYearData }}>
       {children}
     </CalendarStateContext.Provider>
   );

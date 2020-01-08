@@ -1,16 +1,41 @@
 import React from 'react';
 import { X } from 'react-feather';
+import styled from '@emotion/styled';
+import { theme } from '../styles';
 import { ModalProps } from './types';
 import Card from './Card';
 
-const Modal: React.FunctionComponent<ModalProps> = ({ show, onClose, children }) => {
+const Modal: React.FunctionComponent<ModalProps> = ({ show, onClose, width = 500, children }) => {
+  const actualWidth = typeof width === 'number' ? `${width}px` : width;
+
+  const Wrapper = styled.div`
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    background-color: ${theme.colors.gray[200]}CC;
+  `;
+  const Content = styled.div`
+    margin: 5rem auto;
+    max-width: ${actualWidth};
+  `;
+  const CloseX = styled(X)`
+    cursor: pointer;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+  `;
   return show ? (
-    <div className="fixed pos-center">
-      <Card>
-        <X onClick={onClose} className="cursor-pointer absolute top-0 right-0" />
-        {children}
-      </Card>
-    </div>
+    <>
+      <Wrapper onClick={onClose}>
+        <Content>
+          <Card>
+            <CloseX onClick={onClose} />
+            {children}
+          </Card>
+        </Content>
+      </Wrapper>
+    </>
   ) : (
     <></>
   );

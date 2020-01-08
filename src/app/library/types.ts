@@ -33,5 +33,11 @@ export interface ButtonProps {
 
 export interface ModalProps {
   show?: boolean;
+  width?: number | string;
   onClose?: (e: React.MouseEvent) => void;
+}
+
+export interface SpinnerProps {
+  color?: string;
+  size?: number | string;
 }

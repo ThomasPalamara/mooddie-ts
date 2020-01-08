@@ -18,9 +18,16 @@ export const doCreateUser = (id: string, username: string, email: string) => {
 };
 
 export const setMood = (userId: string, data: any) => {
-  db.collection('calendarState')
+  return db
+    .collection('calendarState')
     .doc(userId)
     .set(data);
+  // .then(() => {
+  //   console.log('success :');
+  // })
+  // .catch(err => {
+  //   console.log('err :', err);
+  // });
 };
 export const listenToCalendarStateByUserId = (userId: string, callBack: (data: any) => void) =>
   db

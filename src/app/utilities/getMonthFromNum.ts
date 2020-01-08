@@ -1,6 +1,5 @@
 export default (num: number) => {
-  var months = [
-    undefined,
+  const months = [
     'January',
     'February',
     'March',

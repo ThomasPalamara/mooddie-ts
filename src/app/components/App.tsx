@@ -1,5 +1,7 @@
+/** @jsx jsx */
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { jsx } from '@emotion/core';
 import Navigation from './Navigation/Navigation';
 import Routes from './Navigation/Routes';
 import '../styles/tailwind.css';
@@ -27,9 +29,9 @@ const App = () => {
           <ModalProvider>
             <Router>
               <Navigation />
-              <Container className="pt-6">
+              <div css={{ paddingTop: '1rem' }}>
                 <Routes />
-              </Container>
+              </div>
             </Router>
           </ModalProvider>
         </ToasterProvider>

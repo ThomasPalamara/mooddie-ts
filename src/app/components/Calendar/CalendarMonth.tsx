@@ -1,18 +1,17 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import _ from 'lodash';
 import styled from '@emotion/styled';
+import { useTranslation } from 'react-i18next';
 import Day from './Day';
 import { useCalendar } from '../../contexts/Calendar/CalendarStateContext';
-import getMonthFromNum from '../../utilities/getMonthFromNum';
+import getCalendarMonth from '../../utilities/getCalendarMonth';
 import getDaysInMonth from '../../utilities/getDaysInMonth';
 import { Date } from '../../utilities/types';
 import { theme, mq } from '../../styles';
 
-const months = _.range(0, 12);
-// const months = _.range(1, 3); // ! for tests
-
 interface Props {
   year: number;
+  month: number;
 }
 
 const DayWithContext: React.FC<{ date: Date }> = ({ date }) => {
@@ -26,29 +25,28 @@ const DayWithContext: React.FC<{ date: Date }> = ({ date }) => {
 
 // ! ---->
 
-const Calendar: React.FunctionComponent<Props> = ({ year }) => {
-  const { fz } = theme;
+const Calendar: React.FunctionComponent<Props> = ({ year, month }) => {
+  const { t } = useTranslation('calendar');
 
+  const calendarMonth = getCalendarMonth(year, month - 1);
+  const daysName: [] = t('days', { returnObjects: true });
+
+  // Style
+  const { fz } = theme;
   const Table = styled.table`
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    /* ${mq({ fontSize: [theme.fz.sm, theme.fz.md] })} */
     font-size: ${theme.fz.sm};
-    /* @media (min-width: ${theme.bps.md}px) {
-      font-size: ${theme.fz.md};
-    }
-    @media (min-width: ${theme.bps.lg}px) {
-      font-size: ${theme.fz.lg};
-    } */
     ${mq({ fontSize: [, , fz.sm, fz.md, fz.lg] })}
     width: 100%;
     justify-content: center;
   `;
   const TRow = styled.tr`
-    width: 9ch;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
   `;
   const TData = styled.td`
+    width: ${100 / 7}%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -60,19 +58,18 @@ const Calendar: React.FunctionComponent<Props> = ({ year }) => {
 
   return (
     <Table>
-      {months.map(month => (
-        <TRow key={month}>
-          <TData key={month}>
-            <span>{getMonthFromNum(month)}</span>
-          </TData>
-
-          {_.range(1, getDaysInMonth(month, year) + 1).map(day => {
-            return (
-              <TData key={month + day}>
-                <DayWithContext date={[year, month, day]} key={month + day} />
-              </TData>
-            );
-          })}
+      <TRow>
+        {daysName.map(day => (
+          <TData>{day}</TData>
+        ))}
+      </TRow>
+      {calendarMonth.map(week => (
+        <TRow>
+          {week.map(day => (
+            <TData>
+              <DayWithContext date={[year, month, day]} key={month + day} />
+            </TData>
+          ))}
         </TRow>
       ))}
     </Table>

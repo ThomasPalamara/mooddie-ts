@@ -1,19 +1,24 @@
 import React, { useState } from 'react';
-import Calendar from './Calendar';
-import YearSelector from './YearSelector';
+import { getMonth, getYear } from 'date-fns';
+import Calendar from './CalendarMonth';
+import Operations from './Operations';
+import CalendarOptions from './CalendarOptions';
+import { CalendarOptions as CalendarOptionsType } from '../../utilities/types';
 
 const Index: React.FunctionComponent = () => {
-  const [year, setYear] = useState(new Date().getFullYear());
-
-  const handleYearChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    // TODO check why it's not a number
-    setYear(Number(e.target.value));
+  const initialOptions = {
+    display: 'year',
+    month: getMonth(new Date()),
+    year: getYear(new Date()),
   };
+  const [options, setOptions] = useState(initialOptions);
+  console.log('options calendar index:', options);
   return (
     <>
-      <YearSelector handleYearChange={handleYearChange} />
-      {year}
-      <Calendar year={year} />
+      <CalendarOptions handleOptionChange={(val: CalendarOptionsType) => setOptions(val)} />
+      {options.year}
+      <Operations />
+      <Calendar year={options.year} month={options.month} />
     </>
   );
 };

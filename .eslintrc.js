@@ -26,6 +26,9 @@ module.exports = {
     'react/jsx-curly-brace-presence': 2,
     'react/jsx-props-no-spreading': 0,
     '@typescript-eslint/explicit-function-return-type': 0,
+    'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
+    'no-sparse-arrays': 0,
+    'no-plusplus': ['error', { allowForLoopAfterthoughts: true }],
   },
   overrides: [
     {

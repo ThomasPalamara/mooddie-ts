@@ -1,1 +1,11 @@
-export default ['happy', 'sad', 'angry'];
+export default [
+  'grumpy',
+  'sad',
+  'happy',
+  'depressed',
+  'average',
+  'annoyed',
+  'anxious',
+  'energetic',
+  'sick',
+];
