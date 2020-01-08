@@ -38,12 +38,15 @@ const CalendarOptions: React.FC<Props> = ({ handleOptionChange }) => {
         value={displayOptions.find(e => e.value === options.display)}
         onChange={selected => onchange('display', selected)}
       />
-      <MonthNavigation
-        month={options.month}
-        year={options.year}
-        handleSelectMonth={handleChangeMonthNav}
-      />
-      {/* <YearSelector handleYearChange={handleYearChange} /> */}
+      {options.display === 'month' ? (
+        <MonthNavigation
+          month={options.month}
+          year={options.year}
+          handleSelectMonth={handleChangeMonthNav}
+        />
+      ) : (
+        <YearSelector handleYearChange={e => onchange('year', e.target.value)} />
+      )}
     </>
   );
 };

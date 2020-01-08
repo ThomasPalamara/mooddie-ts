@@ -15,8 +15,9 @@ interface Props {
 }
 
 const DayWithContext: React.FC<{ date: Date }> = ({ date }) => {
+  const { year, month, day } = date;
   const { state: calendarState } = useCalendar();
-  const dayState = _.get(calendarState, date, undefined);
+  const dayState = _.get(calendarState, [year, month, day], undefined);
   return useMemo(() => {
     return <Day date={date} dayState={dayState} />;
   }, [dayState, date]);
@@ -67,7 +68,7 @@ const Calendar: React.FunctionComponent<Props> = ({ year, month }) => {
         <TRow>
           {week.map(day => (
             <TData>
-              <DayWithContext date={[year, month, day]} key={month + day} />
+              <DayWithContext date={{ year, month, day }} key={month + day} />
             </TData>
           ))}
         </TRow>

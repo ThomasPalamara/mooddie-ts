@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { getMonth, getYear } from 'date-fns';
-import Calendar from './CalendarMonth';
+import Month from './CalendarMonth';
+import Year from './Calendar';
 import Operations from './Operations';
 import CalendarOptions from './CalendarOptions';
 import { CalendarOptions as CalendarOptionsType } from '../../utilities/types';
@@ -18,7 +19,11 @@ const Index: React.FunctionComponent = () => {
       <CalendarOptions handleOptionChange={(val: CalendarOptionsType) => setOptions(val)} />
       {options.year}
       <Operations />
-      <Calendar year={options.year} month={options.month} />
+      {options.display === 'month' ? (
+        <Month year={options.year} month={options.month} />
+      ) : (
+        <Year year={options.year} />
+      )}
     </>
   );
 };

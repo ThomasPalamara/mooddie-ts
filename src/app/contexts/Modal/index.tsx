@@ -19,7 +19,7 @@ export const useModal = () => {
 export const ModalProvider: React.FC = ({ children }) => {
   const [moodModal, setMoodModal] = useState<{ show: boolean; date: Date }>({
     show: false,
-    date: [2019, 1, 1],
+    date: { year: 2019, month: 1, day: 1 },
   });
   const showMoodModal: ContextProps['showMoodModal'] = (show, selectedDate) => {
     setMoodModal(prev => {

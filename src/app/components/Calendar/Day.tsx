@@ -16,7 +16,7 @@ const Day: React.FC<DayProps> = ({ date, dayState }) => {
 
   return (
     <Button type="button" onClick={() => showMoodModal(true, date)}>
-      <span>{date[2]}</span>
+      <span>{date.day}</span>
       {dayState}
     </Button>
   );

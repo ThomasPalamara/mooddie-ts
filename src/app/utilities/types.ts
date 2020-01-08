@@ -1,4 +1,4 @@
-export type Date = [number, number, number];
+export type Date = { year: number; month: number; day: number };
 
 export type Mood =
   | 'grumpy'

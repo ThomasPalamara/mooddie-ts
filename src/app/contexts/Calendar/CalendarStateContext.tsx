@@ -43,7 +43,7 @@ const CalendarStateProvider: React.FunctionComponent = ({ children }) => {
 
   const setMood: ContextProps['setMood'] = (mood, date) => {
     return new Promise((resolve, reject) => {
-      const [year, month, day] = date;
+      const { year, month, day } = date;
       const data = _.setWith(state, `${year}.${month}.${day}`, mood, Object);
       if (authUser)
         db.setMood(`${authUser?.uid}`, data)
