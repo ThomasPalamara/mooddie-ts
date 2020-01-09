@@ -1,9 +1,9 @@
 import React, { useMemo } from 'react';
 import _ from 'lodash';
 import styled from '@emotion/styled';
+import { useTranslation } from 'react-i18next';
 import Day from './Day';
 import { useCalendar } from '../../contexts/Calendar/CalendarStateContext';
-import getMonthFromNum from '../../utilities/getMonthFromNum';
 import getDaysInMonth from '../../utilities/getDaysInMonth';
 import { Date } from '../../utilities/types';
 import { theme, mq } from '../../styles';
@@ -28,6 +28,7 @@ const DayWithContext: React.FC<{ date: Date }> = ({ date }) => {
 // ! ---->
 
 const Calendar: React.FunctionComponent<Props> = ({ year }) => {
+  const { t } = useTranslation('calendar');
   const { fz } = theme;
 
   const Table = styled.table`
@@ -64,7 +65,7 @@ const Calendar: React.FunctionComponent<Props> = ({ year }) => {
       {months.map(month => (
         <TRow key={month}>
           <TData key={month}>
-            <span>{getMonthFromNum(month)}</span>
+            <span>{t('months', { returnObjects: true })[month]}</span>
           </TData>
 
           {_.range(1, getDaysInMonth(month, year) + 1).map(day => {
