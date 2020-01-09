@@ -1,6 +1,7 @@
+/** @jsx jsx */
 import React, { useState, useEffect } from 'react';
 import Select, { ValueType } from 'react-select';
-
+import { jsx } from '@emotion/core';
 import { getYear } from 'date-fns';
 import YearSelector from './YearSelector';
 import MonthNavigation from './MonthNavigation';
@@ -38,8 +39,11 @@ const CalendarOptions: React.FC<Props> = ({ handleOptionChange }) => {
   };
 
   return (
-    <>
+    <div>
       <Select
+        css={{
+          width: '300px',
+        }}
         options={displayOptions}
         value={displayOptions.find(e => e.value === options.display)}
         onChange={selectedOption => {
@@ -59,7 +63,7 @@ const CalendarOptions: React.FC<Props> = ({ handleOptionChange }) => {
           }}
         />
       )}
-    </>
+    </div>
   );
 };
 

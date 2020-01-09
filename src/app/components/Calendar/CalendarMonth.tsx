@@ -1,11 +1,11 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 import _ from 'lodash';
 import styled from '@emotion/styled';
 import { useTranslation } from 'react-i18next';
+import { getMonth, getDate } from 'date-fns';
 import Day from './Day';
 import { useCalendar } from '../../contexts/Calendar/CalendarStateContext';
 import getCalendarMonth from '../../utilities/getCalendarMonth';
-import getDaysInMonth from '../../utilities/getDaysInMonth';
 import { Date } from '../../utilities/types';
 import { theme, mq } from '../../styles';
 
@@ -66,9 +66,12 @@ const Calendar: React.FunctionComponent<Props> = ({ year, month }) => {
       </TRow>
       {calendarMonth.map(week => (
         <TRow>
-          {week.map(day => (
+          {week.map(date => (
             <TData>
-              <DayWithContext date={{ year, month, day }} key={month + day} />
+              <DayWithContext
+                date={{ year, month: getMonth(date), day: getDate(date) }}
+                key={month + getDate(date)}
+              />
             </TData>
           ))}
         </TRow>
