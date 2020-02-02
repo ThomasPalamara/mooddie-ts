@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { jsx } from '@emotion/core';
+import { Alert } from 'dale';
 import Navigation from './Navigation/Navigation';
 import Routes from './Navigation/Routes';
 import '../styles/tailwind.css';
@@ -23,20 +24,22 @@ const App = () => {
   }, []);
 
   return (
-    <div className="App">
-      <CalendarStateProvider>
-        <ToasterProvider>
-          <ModalProvider>
-            <Router>
-              <Navigation />
-              <div css={{ paddingTop: '1rem' }}>
-                <Routes />
-              </div>
-            </Router>
-          </ModalProvider>
-        </ToasterProvider>
-      </CalendarStateProvider>
-    </div>
+    <Alert message="hello" />
+    // <div className="App">
+    //   <CalendarStateProvider>
+    //     <ToasterProvider>
+    //       <ModalProvider>
+    //         <Router>
+    //           <Navigation />
+    //           <Alert message="Hello world" />
+    //           <div css={{ paddingTop: '1rem' }}>
+    //             {/* <Routes /> */}
+    //           </div>
+    //         </Router>
+    //       </ModalProvider>
+    //     </ToasterProvider>
+    //   </CalendarStateProvider>
+    // </div>
   );
 };
 

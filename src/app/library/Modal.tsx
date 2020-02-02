@@ -13,7 +13,7 @@ const Modal: React.FunctionComponent<ModalProps> = ({ show, onClose, width = 500
     height: 100%;
     width: 100%;
     top: 0;
-    background-color: ${theme.colors.gray[200]}CC;
+    background-color: ${theme.color('gray.200')}CC;
   `;
   const Content = styled.div`
     margin: 5rem auto;

@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { Formik, Form, useField, FormikHelpers } from 'formik';
 import * as Yup from 'yup';
 
+import { Alert } from 'dale';
 import { auth } from '../../contexts/Firebase';
 import { withAuthentication } from '../../contexts/Firebase/withAuthentication';
 import { useToaster } from '../../contexts/Toaster';

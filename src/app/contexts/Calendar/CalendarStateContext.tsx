@@ -16,6 +16,7 @@ interface ContextProps {
   state: Calendar;
   setMood: (mood: string, date: Date) => Promise<boolean>;
   setYearData: (data: Calendar) => void;
+  resetCalendar: (year: number) => void;
 }
 
 const CalendarStateContext = React.createContext<ContextProps | null>(null);
@@ -52,12 +53,20 @@ const CalendarStateProvider: React.FunctionComponent = ({ children }) => {
     });
   };
 
+  // Just for operation.js
   const setYearData = (data: Calendar) => {
+    console.log('random :');
+    if (authUser) db.setMood(authUser?.uid, { ...data, ...state });
+  };
+
+  const resetCalendar = (year: number) => {
+    console.log('reset');
+    const data = _.setWith(state, `${year}`, {}, Object);
     if (authUser) db.setMood(authUser?.uid, data);
   };
 
   return (
-    <CalendarStateContext.Provider value={{ state, setMood, setYearData }}>
+    <CalendarStateContext.Provider value={{ state, setMood, setYearData, resetCalendar }}>
       {children}
     </CalendarStateContext.Provider>
   );

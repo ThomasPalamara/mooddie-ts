@@ -9,7 +9,7 @@ import { useCalendar } from '../../contexts/Calendar/CalendarStateContext';
 import { Date } from '../../utilities/types';
 import MoodItem from './MoodItem';
 import { Spinner } from '../../library';
-import { theme } from '../../styles/theme';
+import theme from '../../styles';
 
 const MoodPicker: React.FC<{ date: Date }> = ({ date }) => {
   const { setMood } = useCalendar();
@@ -28,7 +28,7 @@ const MoodPicker: React.FC<{ date: Date }> = ({ date }) => {
   };
 
   const SpanStatus = styled.div`
-    color: ${theme.colors.success};
+    color: ${theme.color('success')};
     span {
       display: flex;
     }
@@ -41,6 +41,7 @@ const MoodPicker: React.FC<{ date: Date }> = ({ date }) => {
     display: flex;
     justify-content: space-between;
   `;
+
   return (
     <div>
       <div css={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -48,7 +49,7 @@ const MoodPicker: React.FC<{ date: Date }> = ({ date }) => {
         <SpanStatus>
           {setMoodHasBeenCalledOnce &&
             (loading ? (
-              <Spinner color={theme.colors.success} />
+              <Spinner color={theme.color('success')} />
             ) : (
               <span>
                 <CheckCircle />

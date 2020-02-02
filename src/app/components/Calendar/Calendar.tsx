@@ -6,7 +6,7 @@ import Day from './Day';
 import { useCalendar } from '../../contexts/Calendar/CalendarStateContext';
 import getDaysInMonth from '../../utilities/getDaysInMonth';
 import { Date } from '../../utilities/types';
-import { theme, mq } from '../../styles';
+import { theme, colors } from '../../styles';
 
 const months = _.range(0, 12);
 // const months = _.range(1, 3); // ! for tests
@@ -29,21 +29,11 @@ const DayWithContext: React.FC<{ date: Date }> = ({ date }) => {
 
 const Calendar: React.FunctionComponent<Props> = ({ year }) => {
   const { t } = useTranslation('calendar');
-  const { fz } = theme;
 
   const Table = styled.table`
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
-    /* ${mq({ fontSize: [theme.fz.sm, theme.fz.md] })} */
-    font-size: ${theme.fz.sm};
-    /* @media (min-width: ${theme.bps.md}px) {
-      font-size: ${theme.fz.md};
-    }
-    @media (min-width: ${theme.bps.lg}px) {
-      font-size: ${theme.fz.lg};
-    } */
-    ${mq({ fontSize: [, , fz.sm, fz.md, fz.lg] })}
     width: 100%;
     justify-content: center;
   `;
@@ -54,7 +44,7 @@ const Calendar: React.FunctionComponent<Props> = ({ year }) => {
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid ${theme.colors.gray[200]};
+    border: 1px solid ${colors.gray[200]};
     height: 2rem;
     margin-top: -1px;
     margin-left: -1px;

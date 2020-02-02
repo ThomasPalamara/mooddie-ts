@@ -13,12 +13,11 @@ const Index: React.FunctionComponent = () => {
     year: getYear(new Date()),
   };
   const [options, setOptions] = useState(initialOptions);
-  console.log('options calendar index:', options);
   return (
     <>
       <CalendarOptions handleOptionChange={(val: CalendarOptionsType) => setOptions(val)} />
       {options.year}
-      <Operations />
+      <Operations year={options.year} />
       {options.display === 'month' ? (
         <Month year={options.year} month={options.month} />
       ) : (
