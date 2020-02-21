@@ -5,7 +5,7 @@ import { jsx } from '@emotion/core';
 import { getYear } from 'date-fns';
 import YearSelector from './YearSelector';
 import MonthNavigation from './MonthNavigation';
-import { CalendarOptions as CalendarOptionsType } from '../../../utilities/types';
+import { CalendarOptions as CalendarOptionsType } from '../../../types';
 
 interface Props {
   handleOptionChange: (arg0: CalendarOptionsType) => void;

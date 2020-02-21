@@ -1,10 +1,10 @@
 import React from 'react';
 import { ChevronLeft, ChevronRight } from 'react-feather';
 import styled from '@emotion/styled';
-import { getMonth, getYear } from 'date-fns';
+import { getYear } from 'date-fns';
 import { useTranslation } from 'react-i18next';
-import { object } from 'yup';
-import { handleSelectMonthNav } from '../../../utilities/types';
+
+import { handleSelectMonthNav } from '../../../types';
 
 interface Props {
   handleSelectMonth: handleSelectMonthNav;
@@ -23,7 +23,7 @@ const MonthNavigation: React.FC<Props> = ({
   const handleChange = (operation: 'next' | 'prev') => {
     let newYear = year;
     let newMonth = operation === 'prev' ? month - 1 : month + 1;
-    console.log('newMonth :', newMonth);
+
     if (newMonth === -1) {
       newMonth = 11;
       newYear -= 1;

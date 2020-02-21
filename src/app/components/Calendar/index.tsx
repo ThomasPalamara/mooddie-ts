@@ -4,7 +4,7 @@ import Month from './CalendarMonth';
 import Year from './Calendar';
 import Operations from './Operations';
 import CalendarOptions from './CalendarOptions';
-import { CalendarOptions as CalendarOptionsType } from '../../utilities/types';
+import { CalendarOptions as CalendarOptionsType } from '../../types';
 
 const Index: React.FunctionComponent = () => {
   const initialOptions = {

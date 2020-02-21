@@ -1,12 +1,12 @@
 import React, { useMemo } from 'react';
 import _ from 'lodash';
-import styled from '@emotion/styled';
+import { styled } from '@material-ui/styles';
 import { useTranslation } from 'react-i18next';
 import Day from './Day';
 import { useCalendar } from '../../contexts/Calendar/CalendarStateContext';
 import getDaysInMonth from '../../utilities/getDaysInMonth';
-import { Date } from '../../utilities/types';
-import { theme, colors } from '../../styles';
+import { Date } from '../../types';
+import { useCalendarStyles } from './styles';
 
 const months = _.range(0, 12);
 // const months = _.range(1, 3); // ! for tests
@@ -30,44 +30,26 @@ const DayWithContext: React.FC<{ date: Date }> = ({ date }) => {
 const Calendar: React.FunctionComponent<Props> = ({ year }) => {
   const { t } = useTranslation('calendar');
 
-  const Table = styled.table`
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    width: 100%;
-    justify-content: center;
-  `;
-  const TRow = styled.tr`
-    width: 9ch;
-  `;
-  const TData = styled.td`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid ${colors.gray[200]};
-    height: 2rem;
-    margin-top: -1px;
-    margin-left: -1px;
-  `;
+  const classes = useCalendarStyles();
 
   return (
-    <Table>
+    <table className={classes.table}>
       {months.map(month => (
-        <TRow key={month}>
-          <TData key={month}>
+        <tr className={classes.tr} key={month}>
+          <td className={classes.td} key={month}>
             <span>{t('months', { returnObjects: true })[month]}</span>
-          </TData>
+          </td>
 
           {_.range(1, getDaysInMonth(month, year) + 1).map(day => {
             return (
-              <TData key={month + day}>
+              <td className={classes.td} key={month + day}>
                 <DayWithContext date={{ year, month, day }} key={month + day} />
-              </TData>
+              </td>
             );
           })}
-        </TRow>
+        </tr>
       ))}
-    </Table>
+    </table>
   );
 };
 

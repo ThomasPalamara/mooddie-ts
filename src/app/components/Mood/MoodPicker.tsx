@@ -4,12 +4,12 @@ import { CheckCircle } from 'react-feather';
 import { useTranslation } from 'react-i18next';
 import styled from '@emotion/styled';
 import { jsx } from '@emotion/core';
+import { CircularProgress } from '@material-ui/core';
 import moods from '../../constants/moods';
 import { useCalendar } from '../../contexts/Calendar/CalendarStateContext';
-import { Date } from '../../utilities/types';
+import { Date } from '../../types';
 import MoodItem from './MoodItem';
-import { Spinner } from '../../library';
-import theme from '../../styles';
+// import theme from '../../styles';
 
 const MoodPicker: React.FC<{ date: Date }> = ({ date }) => {
   const { setMood } = useCalendar();
@@ -27,8 +27,8 @@ const MoodPicker: React.FC<{ date: Date }> = ({ date }) => {
     setMood(mood, date).then(() => setloading(false));
   };
 
+  // color: ${theme.color('success')};
   const SpanStatus = styled.div`
-    color: ${theme.color('success')};
     span {
       display: flex;
     }
@@ -49,7 +49,7 @@ const MoodPicker: React.FC<{ date: Date }> = ({ date }) => {
         <SpanStatus>
           {setMoodHasBeenCalledOnce &&
             (loading ? (
-              <Spinner color={theme.color('success')} />
+              <CircularProgress />
             ) : (
               <span>
                 <CheckCircle />

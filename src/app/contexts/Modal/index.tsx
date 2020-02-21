@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import MoodModal from '../../components/Mood/MoodModal';
-import { Date } from '../../utilities/types';
+import { Date } from '../../types';
 
 interface ContextProps {
   showMoodModal: (show: boolean, date?: Date) => void;
@@ -31,7 +31,7 @@ export const ModalProvider: React.FC = ({ children }) => {
   return (
     <ModalContext.Provider value={{ showMoodModal }}>
       {children}
-      <MoodModal show={moodModal.show} onClose={() => showMoodModal(false)} date={moodModal.date} />
+      <MoodModal open={moodModal.show} onClose={() => showMoodModal(false)} date={moodModal.date} />
     </ModalContext.Provider>
   );
 };

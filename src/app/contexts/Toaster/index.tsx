@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { Toast } from '../../library';
+import { Alert as Toast } from 'dale';
 
 interface Toast {
   id: number;

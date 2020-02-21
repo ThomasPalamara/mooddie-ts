@@ -1,8 +1,6 @@
-/** @jsx jsx */
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { jsx } from '@emotion/core';
-import { Alert } from 'dale';
+import { ThemeProvider } from '@material-ui/core';
 import Navigation from './Navigation/Navigation';
 import Routes from './Navigation/Routes';
 import '../styles/tailwind.css';
@@ -11,7 +9,7 @@ import { firebase } from '../contexts/Firebase';
 import { ToasterProvider } from '../contexts/Toaster';
 import { CalendarStateProvider } from '../contexts/Calendar/CalendarStateContext';
 import { ModalProvider } from '../contexts/Modal';
-import { Container } from '../library';
+import theme from '../styles/theme';
 
 const App = () => {
   const [, setauthUser] = useState(null);
@@ -24,22 +22,22 @@ const App = () => {
   }, []);
 
   return (
-    <Alert message="hello" />
-    // <div className="App">
-    //   <CalendarStateProvider>
-    //     <ToasterProvider>
-    //       <ModalProvider>
-    //         <Router>
-    //           <Navigation />
-    //           <Alert message="Hello world" />
-    //           <div css={{ paddingTop: '1rem' }}>
-    //             {/* <Routes /> */}
-    //           </div>
-    //         </Router>
-    //       </ModalProvider>
-    //     </ToasterProvider>
-    //   </CalendarStateProvider>
-    // </div>
+    <div className="App">
+      <CalendarStateProvider>
+        <ThemeProvider theme={theme}>
+          <ToasterProvider>
+            <ModalProvider>
+              <Router>
+                <Navigation />
+                <div style={{ paddingTop: '1rem' }}>
+                  <Routes />
+                </div>
+              </Router>
+            </ModalProvider>
+          </ToasterProvider>
+        </ThemeProvider>
+      </CalendarStateProvider>
+    </div>
   );
 };
 

@@ -21,6 +21,16 @@ module.exports = {
         html: true,
       },
     ],
+    'import/extensions': [
+      'error',
+      'ignorePackages',
+      {
+        js: 'never',
+        jsx: 'never',
+        ts: 'never',
+        tsx: 'never',
+      },
+    ],
     'prefer-template': 2,
     'react/jsx-filename-extension': [2, { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
     'react/jsx-curly-brace-presence': 2,
@@ -44,7 +54,6 @@ module.exports = {
     },
     'import/resolver': {
       node: {
-        failOnError: false,
         extensions: ['.js', '.jsx', '.ts', '.tsx'],
       },
     },

@@ -1,16 +1,18 @@
 import React from 'react';
-import { Modal, Container } from '../../library';
-import { ModalProps } from '../../library/types';
-import { Date } from '../../utilities/types';
+import { Modal, Container } from '@material-ui/core';
+import { Date } from '../../types';
+
 import MoodPicker from './MoodPicker';
 
-interface MoodModalProps extends ModalProps {
+interface MoodModalProps {
   date: Date;
+  onClose: () => void;
+  open: boolean;
 }
 
-const MoodModal: React.FC<MoodModalProps> = ({ show, onClose, date }) => {
+const MoodModal: React.FC<MoodModalProps> = ({ open, onClose, date }) => {
   return (
-    <Modal show={show} onClose={onClose} width={700}>
+    <Modal open={open} onClose={onClose}>
       <Container>
         <MoodPicker date={date} />
       </Container>

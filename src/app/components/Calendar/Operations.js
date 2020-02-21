@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Button } from '../../library';
+import { Button } from '@material-ui/core';
 
 import getDaysInMonth from '../../utilities/getDaysInMonth';
 import moods from '../../constants/moods';

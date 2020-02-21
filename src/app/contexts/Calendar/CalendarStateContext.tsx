@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import _ from 'lodash';
 import { db } from '../Firebase';
 import { useAuthContext } from '../Firebase/AuthUserContext';
-import { Date, Mood } from '../../utilities/types';
+import { Date, Mood } from '../../types';
 
 interface Calendar {
   [key: number]: {

@@ -9,11 +9,11 @@ export type Mood =
   | 'annoyed'
   | 'anxious'
   | 'energetic'
-  | 'sick'
-  | undefined;
+  | 'sick';
+
 export interface Day {
   date: Date;
-  dayState: Mood;
+  dayState: Mood | undefined;
 }
 
 export type CalendarOptions = {

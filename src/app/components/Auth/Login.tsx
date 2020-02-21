@@ -4,12 +4,11 @@ import { useHistory } from 'react-router-dom';
 import { Formik, Form, useField, FormikHelpers } from 'formik';
 import * as Yup from 'yup';
 
-import { Alert } from 'dale';
+import { TextField, Button } from '@material-ui/core';
 import { auth } from '../../contexts/Firebase';
 import { withAuthentication } from '../../contexts/Firebase/withAuthentication';
 import { useToaster } from '../../contexts/Toaster';
 
-import { TextField, AuthWrapper, Button } from '../../library';
 import ROUTES from '../../constants/routes';
 
 interface FormValues {
@@ -49,14 +48,15 @@ const Signup: React.FC = () => {
       <TextField
         {...field}
         {...props}
-        error={meta.touched && meta.error ? meta.error : null}
+        error={meta.touched && !!meta.error}
+        helperText={meta.touched && meta.error}
         type={type}
       />
     );
   };
 
   return (
-    <AuthWrapper>
+    <div>
       <h1 className="text-center">{t('signIn.title')}</h1>
       <Formik
         initialValues={initialFormValues}
@@ -69,7 +69,7 @@ const Signup: React.FC = () => {
           <Button type="submit">{t('submit')}</Button>
         </Form>
       </Formik>
-    </AuthWrapper>
+    </div>
   );
 };
 export default withAuthentication(Signup);

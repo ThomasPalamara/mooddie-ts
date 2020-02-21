@@ -9,12 +9,8 @@ export const NavigationOptions = (): Array<NavigationOption> => [
     title: 'Landing',
   },
   {
-    value: 'sign_up',
-    title: 'Sign up',
-  },
-  {
-    value: 'sign_in',
-    title: 'Sign in',
+    value: 'landing',
+    title: 'Landing',
   },
 ];
 export const AuthNavigationOptions = (): Array<NavigationOption> => [
