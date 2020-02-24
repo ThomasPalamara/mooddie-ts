@@ -1,17 +1,14 @@
-/** @jsx jsx */
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { jsx } from '@emotion/core';
-import { Alert } from 'dale';
+import { Global } from '@emotion/core';
 import Navigation from './Navigation/Navigation';
 import Routes from './Navigation/Routes';
-import '../styles/tailwind.css';
 import { withAuthentication } from '../contexts/Firebase/withAuthentication';
 import { firebase } from '../contexts/Firebase';
 import { ToasterProvider } from '../contexts/Toaster';
-import { CalendarStateProvider } from '../contexts/Calendar/CalendarStateContext';
 import { ModalProvider } from '../contexts/Modal';
-import { Container } from '../library';
+import { CalendarStateProvider } from '../contexts/Calendar/CalendarStateContext';
+import * as Styled from '../styles/components/App.style';
 
 const App = () => {
   const [, setauthUser] = useState(null);
@@ -24,22 +21,23 @@ const App = () => {
   }, []);
 
   return (
-    <Alert message="hello" />
-    // <div className="App">
-    //   <CalendarStateProvider>
-    //     <ToasterProvider>
-    //       <ModalProvider>
-    //         <Router>
-    //           <Navigation />
-    //           <Alert message="Hello world" />
-    //           <div css={{ paddingTop: '1rem' }}>
-    //             {/* <Routes /> */}
-    //           </div>
-    //         </Router>
-    //       </ModalProvider>
-    //     </ToasterProvider>
-    //   </CalendarStateProvider>
-    // </div>
+    <>
+      <Global styles={{ html: { fontSize: '62.5%' } }} />
+      <Styled.AppRoot>
+        <CalendarStateProvider>
+          <ToasterProvider>
+            <ModalProvider>
+              <Router>
+                <Navigation />
+                <Styled.ContentWrapper>
+                  <Routes />
+                </Styled.ContentWrapper>
+              </Router>
+            </ModalProvider>
+          </ToasterProvider>
+        </CalendarStateProvider>
+      </Styled.AppRoot>
+    </>
   );
 };
 

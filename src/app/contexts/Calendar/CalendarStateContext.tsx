@@ -2,19 +2,18 @@ import React, { useState, useEffect, useContext } from 'react';
 import _ from 'lodash';
 import { db } from '../Firebase';
 import { useAuthContext } from '../Firebase/AuthUserContext';
-import { Date, Mood } from '../../utilities/types';
 
 interface Calendar {
   [key: number]: {
     [key: number]: {
-      [key: number]: Mood;
+      [key: number]: T.Mood;
     };
   };
 }
 
 interface ContextProps {
   state: Calendar;
-  setMood: (mood: string, date: Date) => Promise<boolean>;
+  setMood: (mood: string, date: T.Date) => Promise<boolean>;
   setYearData: (data: Calendar) => void;
   resetCalendar: (year: number) => void;
 }

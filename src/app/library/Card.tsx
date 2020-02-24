@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import styled from '@emotion/styled';
-import theme from '../styles';
+import theme from '../styles/theme';
 
 interface Props {
   className?: string;
@@ -12,7 +12,7 @@ const Card: React.FunctionComponent<Props> = ({ className, ...others }) => {
 
   const Card = styled.div({
     width: '100%',
-    padding: theme.space(3),
+    padding: theme.spacing[3],
   });
   return <Card className={classes} {...others} />;
 };

@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { theme } from '../styles';
+import theme from '../styles/theme';
 import { SpinnerProps } from './types';
 
 const Spinner: React.FunctionComponent<SpinnerProps> = ({
   size = 40,
-  color = theme.color('gray.800'),
+  color = theme.colors.gray[800],
 }) => {
   const actualSize = '1em';
   //   const actualSize = typeof size === 'number' ? `${size}px` : size;

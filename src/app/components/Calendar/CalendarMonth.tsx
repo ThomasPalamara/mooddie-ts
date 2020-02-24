@@ -1,20 +1,20 @@
 import React, { useMemo } from 'react';
 import _ from 'lodash';
-import styled from '@emotion/styled';
 import { useTranslation } from 'react-i18next';
 import { getMonth, getDate } from 'date-fns';
+import * as Styled from '../../styles/components/Calendar.style';
 import Day from './Day';
 import { useCalendar } from '../../contexts/Calendar/CalendarStateContext';
 import getCalendarMonth from '../../utilities/getCalendarMonth';
-import { Date } from '../../utilities/types';
-import theme, { colors } from '../../styles';
 
 interface Props {
   year: number;
   month: number;
 }
 
-const DayWithContext: React.FC<{ date: Date }> = ({ date }) => {
+// ! <---- Important part of the component. Without useMemo, the usage of useContext would rerender the whole tree of 365 <Day/> which is expensive
+
+const DayWithContext: React.FC<{ date: T.Date }> = ({ date }) => {
   const { year, month, day } = date;
   const { state: calendarState } = useCalendar();
   const dayState = _.get(calendarState, [year, month, day], undefined);
@@ -22,7 +22,6 @@ const DayWithContext: React.FC<{ date: Date }> = ({ date }) => {
     return <Day date={date} dayState={dayState} />;
   }, [dayState, date]);
 };
-// ! <---- Important part of the component. Without useMemo, the usage of useContext would rerender the whole tree of 365 <Day/> which is expensive
 
 // ! ---->
 
@@ -32,51 +31,26 @@ const Calendar: React.FunctionComponent<Props> = ({ year, month }) => {
   const calendarMonth = getCalendarMonth(year, month - 1);
   const daysName: [] = t('days', { returnObjects: true });
 
-  // Style
-  // const { fz } = theme;
-  const Table = styled.table`
-    width: 100%;
-    justify-content: center;
-  `;
-  // font-size: ${theme.fz.sm};
-  // ${mq({ fontSize: [, , fz.sm, fz.md, fz.lg] })}
-  const TRow = styled.tr`
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-  `;
-  const TData = styled.td`
-    width: ${100 / 7}%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid ${colors.gray[200]};
-    height: 2rem;
-    margin-top: -1px;
-    margin-left: -1px;
-  `;
-
   return (
-    <Table>
-      <TRow>
+    <Styled.Table>
+      <Styled.TRow>
         {daysName.map(day => (
-          <TData>{day}</TData>
+          <Styled.TData>{day}</Styled.TData>
         ))}
-      </TRow>
+      </Styled.TRow>
       {calendarMonth.map(week => (
-        <TRow>
+        <Styled.TRow>
           {week.map(date => (
-            <TData>
+            <Styled.TData>
               <DayWithContext
                 date={{ year, month: getMonth(date), day: getDate(date) }}
                 key={month + getDate(date)}
               />
-            </TData>
+            </Styled.TData>
           ))}
-        </TRow>
+        </Styled.TRow>
       ))}
-    </Table>
+    </Styled.Table>
   );
 };
 

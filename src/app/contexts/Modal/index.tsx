@@ -1,9 +1,8 @@
 import React, { useState, useContext } from 'react';
 import MoodModal from '../../components/Mood/MoodModal';
-import { Date } from '../../utilities/types';
 
 interface ContextProps {
-  showMoodModal: (show: boolean, date?: Date) => void;
+  showMoodModal: (show: boolean, date?: T.Date) => void;
 }
 
 export const ModalContext = React.createContext<ContextProps | null>(null);
@@ -17,7 +16,7 @@ export const useModal = () => {
 };
 
 export const ModalProvider: React.FC = ({ children }) => {
-  const [moodModal, setMoodModal] = useState<{ show: boolean; date: Date }>({
+  const [moodModal, setMoodModal] = useState<{ show: boolean; date: T.Date }>({
     show: false,
     date: { year: 2019, month: 1, day: 1 },
   });
