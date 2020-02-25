@@ -3,7 +3,8 @@ import { Link, withRouter } from 'react-router-dom';
 import ROUTES from '../../constants/routes';
 import { NavigationOptions, AuthNavigationOptions } from './navigationOptions';
 import toConstCase from '../../utilities/toConstCase';
-import { Button, Container } from '../../library';
+import { Button } from '../../library';
+import * as Styled from '../../styles/components/Navigation.style';
 import { useAuthContext } from '../../contexts/Firebase/AuthUserContext';
 // import { withAuthentication } from '../../contexts/Firebase/withAuthentication';
 import { auth } from '../../contexts/Firebase';
@@ -12,17 +13,28 @@ const Navigation: React.FunctionComponent = () => {
   const authUser = useAuthContext();
   const options = authUser ? AuthNavigationOptions() : NavigationOptions();
 
+  const NavLink = Styled.Link.withComponent(Link);
+
   return (
-    <Container>
-      <ul className="flex justify-start py-3">
+    <Styled.Wrapper>
+      <div>
         {options.map(({ value, title }) => (
-          <Link key={value} className="p-3" to={ROUTES[toConstCase(value)]}>
+          <NavLink key={value} to={ROUTES[toConstCase(value)]}>
             {title}
-          </Link>
+          </NavLink>
         ))}
-        {authUser && <Button onClick={() => auth.doSignOut()}>Sign Out</Button>}
-      </ul>
-    </Container>
+      </div>
+      <div>
+        {authUser ? (
+          <Button onClick={() => auth.doSignOut()}>Sign Out</Button>
+        ) : (
+          <>
+            <NavLink to="signUp">Sign Up</NavLink>
+            <NavLink to="signIn">Sign In</NavLink>
+          </>
+        )}
+      </div>
+    </Styled.Wrapper>
   );
 };
 
